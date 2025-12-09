@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import feedparser
-from redis_client import save
+from redis_client import save_fundamental
 from datetime import datetime
 
 def parse_pe_pb(driver, ticker):
@@ -76,8 +76,7 @@ def parse_rss_news(ticker, rss_url):
             "source": rss_url
         })
 
-    # Сохраняем в Redis
     if news_items:
-        save(key, news_items)
+        save_fundamental(key, news_items)
 
     return news_items
