@@ -4,16 +4,16 @@ uv run granian src.app:app --interface asgi --port 8000
 ```
 
 
-### Вывод sber pe pb:
+### Вывод SBER pe pb:
 ```
 {
-   "Ticker":"sber",
+   "Ticker":"SBER",
    "P/E":"3,94",
    "P/B":"0,87"
 }
 ```
 
-### Вывод sber divs:  
+### Вывод SBER divs:  
 ```
 [
    {
@@ -37,7 +37,7 @@ uv run granian src.app:app --interface asgi --port 8000
 ]
 ```
 
-### Вывод news:  
+### Вывод SBER news:  
 ```
 [
    {
