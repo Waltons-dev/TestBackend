@@ -2,12 +2,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import feedparser
-from redis_client import save_fundamental
+from ..clients.redis_client import save_fundamental
 from datetime import datetime
 
 def parse_pe_pb(driver, ticker):
     try:
-        driver.get(f"https://www.finam.ru/quote/moex/{ticker}/financial/")
+        driver.get(f"https://www.finam.ru/quote/moex/{ticker.lower()}/financial/")
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//div[contains(text(),'P/E')]"))
         )
@@ -34,7 +34,7 @@ def parse_pe_pb(driver, ticker):
 
 def parse_divs(driver, ticker):
     try:
-        driver.get(f"https://www.finam.ru/quote/moex/{ticker}/dividends/")
+        driver.get(f"https://www.finam.ru/quote/moex/{ticker.lower()}/dividends/")
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "table.table-generic tbody tr"))
         )
