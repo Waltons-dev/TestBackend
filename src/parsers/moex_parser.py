@@ -3,10 +3,8 @@ import json
 from datetime import datetime
 from typing import List
 from datetime import timedelta
-from redis_client import save_candles
-from redis_client import load_candles
-from redis_client import redis_has_candles
-from models import Candle
+from ..clients.redis_client import save_candles, load_candles, redis_has_candles
+from ..models.candle import Candle
 
 # доступные инттервалы для свечей
 def convert_interval(tf: str) -> int:
@@ -99,7 +97,3 @@ def parse_and_save(ticker: str, timeframe: str):
     for c in candles:
         print(c.to_txt_format())
     return candles
-
-if __name__ == "__main__":
-    candles = parse_and_save("YDEX", "M10")
-
