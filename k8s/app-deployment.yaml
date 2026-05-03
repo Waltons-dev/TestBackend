@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fin-parser
+spec:
+  replicas: 3 
+  selector:
+    matchLabels:
+      app: fin-parser
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: fin-parser
+    spec:
+      containers:
+      - name: app-backend
+        image: jaymevol/kursachbackend-app:latest
+        imagePullPolicy: Always
+        command: ["granian"]
+        args: ["--interface", "asgi", "--host", "0.0.0.0", "--port", "8000", "app"] 
+        resources:
+          requests:
+            memory: 300Mi
+            cpu: 200m
+          limits:
+            memory: 500Mi
+            cpu: 500m
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 20
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: SELENIUM_REMOTE_URL
+          value: "http://chrome:4444/wd/hub"        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fin-parser
+spec:
+  selector:
+    app: fin-parser
+  ports:
+  - port: 8000
+    targetPort: 8000
+  type: ClusterIP 
