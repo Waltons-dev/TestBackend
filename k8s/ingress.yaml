@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fin-parser
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: fin-parser.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix  
+        backend:
+          service:
+            name: fin-parser
+            port: 
+              number: 8000
