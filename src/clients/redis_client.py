@@ -1,10 +1,20 @@
 from datetime import datetime
 import redis.asyncio
 import json
+import os
 from typing import List
-from ..models.candle import Candle
+from models.candle import Candle
 
-r = redis.Redis(host='127.0.0.1', port=6379, db=0, decode_responses=True)
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+REDIS_DB = int(os.getenv("REDIS_DB", 0))
+
+r = redis.Redis(
+    host=REDIS_HOST, 
+    port=REDIS_PORT, 
+    db=REDIS_DB, 
+    decode_responses=True
+)
 
 def save_fundamental(key, data):
     r.set(key, json.dumps(data, ensure_ascii=False))
