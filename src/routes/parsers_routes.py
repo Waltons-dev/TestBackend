@@ -17,3 +17,7 @@ async def get_dividends(ticker: str) -> List[Dict[str, Any]]:
 @get("/news")
 async def get_news(ticker: str, rss_url: str) -> List[Dict[str, Any]]:
     return await get_news_cached(ticker, rss_url)
+
+@get("/health")
+async def get_health() -> dict:
+    return {"status": "ok"}
