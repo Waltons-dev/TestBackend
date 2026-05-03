@@ -8,7 +8,6 @@ services:
       - 6379:6379
     volumes:
       - redis-data:/data
-    restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -23,7 +22,6 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - SELENIUM_REMOTE_URL=http://chrome:4444/wd/hub
-    restart: unless-stopped
     depends_on:
       chrome:
         condition: service_healthy
