@@ -1,9 +1,9 @@
 ### Run app  
 ```
-uv run granian src.app:app --interface asgi --port 8000
+docker-compose up --build
 ```
 
-
+##Пример вывода
 ### Вывод SBER pe pb:
 ```
 {
