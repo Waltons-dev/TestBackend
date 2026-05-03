@@ -2,10 +2,10 @@ from typing import List, Dict, Any
 import asyncio
 from datetime import datetime
 from litestar import Litestar, get
-from ..clients.redis_client import save_fundamental, load_fundamental
-from ..parsers.moex_parser import load_candles, parse_and_save
-from ..drivers.selenium_driver import init_driver
-from ..parsers.finam_parsers import parse_pe_pb, parse_divs, parse_rss_news
+from clients.redis_client import save_fundamental, load_fundamental
+from parsers.moex_parser import load_candles, parse_and_save
+from drivers.selenium_driver import init_driver
+from parsers.finam_parsers import parse_pe_pb, parse_divs, parse_rss_news
 
 async def get_candles_cached(ticker: str, tf: str) -> List[Dict[str, Any]]:
     candles = load_candles(ticker, tf)

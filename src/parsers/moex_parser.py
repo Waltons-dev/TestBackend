@@ -3,8 +3,8 @@ import json
 from datetime import datetime
 from typing import List
 from datetime import timedelta
-from ..clients.redis_client import save_candles, load_candles, redis_has_candles
-from ..models.candle import Candle
+from clients.redis_client import save_candles, load_candles, redis_has_candles
+from models.candle import Candle
 
 # доступные инттервалы для свечей
 def convert_interval(tf: str) -> int:

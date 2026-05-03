@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import feedparser
-from ..clients.redis_client import save_fundamental
+from clients.redis_client import save_fundamental
 from datetime import datetime
 
 def parse_pe_pb(driver, ticker):

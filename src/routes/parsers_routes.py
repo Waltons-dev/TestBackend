@@ -1,4 +1,4 @@
-from ..services.parsers_service import get_candles_cached, get_pe_pb_cached, get_divs_cached, get_news_cached
+from services.parsers_service import get_candles_cached, get_pe_pb_cached, get_divs_cached, get_news_cached
 from litestar import get
 from typing import List,Dict,Any
 
